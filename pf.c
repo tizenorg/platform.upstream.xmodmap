@@ -89,7 +89,7 @@ void process_line (buffer)
 
     /* copy buffer since it may point to unwritable date */
     len = strlen(buffer);
-    cp = chk_malloc(len);
+    cp = chk_malloc(len + 1);
     strcpy(cp, buffer);
     buffer = cp;
     
