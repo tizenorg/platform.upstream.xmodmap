@@ -24,7 +24,7 @@
 .\" other dealings in this Software without prior written authorization
 .\" from The Open Group.
 .\" 
-.\" $XFree86: xc/programs/xmodmap/xmodmap.man,v 1.13 2003/06/26 10:19:49 eich Exp $
+.\" $XFree86: xc/programs/xmodmap/xmodmap.man,v 1.11 2002/10/12 16:06:48 herrb Exp $
 .\" 
 .de EX		\"Begin example
 .ne 5
