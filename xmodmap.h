@@ -26,6 +26,7 @@ other dealings in this Software without prior written authorization
 from The Open Group.
 
 */
+/* $XFree86: xc/programs/xmodmap/xmodmap.h,v 1.5 2001/12/14 20:02:13 dawes Exp $ */
 
 extern char *ProgramName;
 extern Display *dpy;
@@ -36,13 +37,22 @@ extern char *inputFilename;
 extern int lineno;
 extern int parse_errors;
 
-extern void initialize_map ();
-extern void process_file ();
-extern void process_line ();
-extern void handle_line ();
-extern void print_opcode ();
-extern void print_work_queue ();
-extern int execute_work_queue ();
-extern void print_modifier_map ();
-extern void print_key_table ();
-extern void print_pointer_map ();
+extern void initialize_map(void);
+extern void process_file(char *filename);
+extern void process_line(char *buffer);
+extern void handle_line(char *line, int len);
+extern void print_work_queue(void);
+extern int execute_work_queue(void);
+extern void print_modifier_map(void);
+extern void print_key_table(Bool exprs);
+extern void print_pointer_map(void);
+
+extern int UpdateModifierMapping(XModifierKeymap *map);
+extern int AddModifier(XModifierKeymap **mapp, KeyCode keycode, int modifier);
+extern int RemoveModifier(XModifierKeymap **mapp, KeyCode keycode, 
+			  int modifier);
+extern int ClearModifier(XModifierKeymap **mapp, int modifier);
+extern void PrintModifierMapping(XModifierKeymap *map, FILE *fp);
+extern void PrintKeyTable(Bool exprs, FILE *fp);
+extern void PrintPointerMap(FILE *fp);
+extern int SetPointerMap(unsigned char *map, int n);

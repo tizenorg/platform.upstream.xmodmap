@@ -26,6 +26,10 @@ other dealings in this Software without prior written authorization
 from The Open Group.
 
 */
+/* $XFree86: xc/programs/xmodmap/wq.h,v 1.5 2001/12/14 20:02:13 dawes Exp $ */
+
+#ifndef _WQ_H
+#define _WQ_H
 
 /* 
  * Input is parsed and a work queue is built that is executed later.  This
@@ -141,3 +145,5 @@ extern struct modtab {
 #define AllocStruct(s) ((s *) malloc (sizeof (s)))
 
 #define MAXKEYSYMNAMESIZE 80		/* absurdly large */
+
+#endif

@@ -26,10 +26,12 @@ other dealings in this Software without prior written authorization
 from The Open Group.
 
 */
+/* $XFree86: xc/programs/xmodmap/xmodmap.c,v 1.7 2001/12/14 20:02:13 dawes Exp $ */
 
 #include <X11/Xos.h>
 #include <X11/Xlib.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <ctype.h>
 #include "xmodmap.h"
 
@@ -39,8 +41,8 @@ int min_keycode, max_keycode;
 Bool verbose = False;
 Bool dontExecute = False;
 
-void Exit (status)
-    int status;
+static void 
+Exit(int status)
 {
     if (dpy) {
 	XCloseDisplay (dpy);
@@ -66,7 +68,8 @@ static char *help_message[] = {
 NULL};
 
 
-void usage ()
+static void 
+usage(void)
 {
     char **cpp;
 
@@ -99,7 +102,8 @@ static char *grammar_message[] = {
 NULL };
 
 
-void grammar_usage ()
+static void 
+grammar_usage(void)
 {
     char **cpp;
 
@@ -113,9 +117,8 @@ void grammar_usage ()
 
 int parse_errors = 0;
 
-main (argc, argv)
-    int argc;
-    char **argv;
+int
+main(int argc, char *argv[])
 {
     int i;
     char *displayname = NULL;

@@ -56,6 +56,7 @@ from The Open Group.
  * Author:  Jim Fulton, MIT X Consortium; derived from parts of the
  * original xmodmap, written by David Rosenthal, of Sun Microsystems.
  */
+/* $XFree86: xc/programs/xmodmap/exec.c,v 1.5 2001/12/14 20:02:13 dawes Exp $ */
 
 #include <X11/Xos.h>
 #include <X11/Xlib.h>
@@ -63,8 +64,8 @@ from The Open Group.
 #include "xmodmap.h"
 #include "wq.h"
 
-static mapping_busy_key (timeout)
-    int timeout;
+static void
+mapping_busy_key(int timeout)
 {
     int i;
     unsigned char keymap[32];
@@ -81,15 +82,15 @@ static mapping_busy_key (timeout)
 	    KeySym ks = XKeycodeToKeysym (dpy, (KeyCode) i, 0);
 	    char *cp = XKeysymToString (ks);
 	    fprintf (stderr, "    %s (keysym 0x%x, keycode %d)\n",
-		     cp ? cp : "UNNAMED", ks, i);
+		     cp ? cp : "UNNAMED", (unsigned int)ks, i);
 	}
     }
     sleep (timeout);
     return;
 }
 
-static mapping_busy_pointer (timeout)
-    int timeout;
+static void
+mapping_busy_pointer(int timeout)
 {
     int i;
     Window root, child;			/* dummy variables */
@@ -119,8 +120,8 @@ static mapping_busy_pointer (timeout)
  * and deals with retransmissions due to the keyboard being busy.
  */
 
-int UpdateModifierMapping (map)
-    XModifierKeymap *map;
+int 
+UpdateModifierMapping(XModifierKeymap *map)
 {
     int retries, timeout;
 
@@ -155,10 +156,8 @@ int UpdateModifierMapping (map)
  * AddModifier - this adds a keycode to the modifier list
  */
 
-int AddModifier (mapp, keycode, modifier)
-    XModifierKeymap **mapp;
-    KeyCode keycode;
-    int modifier;
+int 
+AddModifier(XModifierKeymap **mapp, KeyCode keycode, int modifier)
 {
     if (keycode) {
 	*mapp = XInsertModifiermapEntry (*mapp, keycode, modifier);
@@ -174,10 +173,8 @@ int AddModifier (mapp, keycode, modifier)
  * DeleteModifier - this removes a keycode from the modifier list
  */
 
-int RemoveModifier (mapp, keycode, modifier)
-    XModifierKeymap **mapp;
-    KeyCode keycode;
-    int modifier;
+int 
+RemoveModifier(XModifierKeymap **mapp, KeyCode keycode, int modifier)
 {
     if (keycode) {
 	*mapp = XDeleteModifiermapEntry (*mapp, keycode, modifier);
@@ -193,9 +190,8 @@ int RemoveModifier (mapp, keycode, modifier)
  * ClearModifier - this removes all entries from the modifier list
  */
 
-int ClearModifier (mapp, modifier)
-    XModifierKeymap **mapp;
-    int modifier;
+int 
+ClearModifier(XModifierKeymap **mapp, int modifier)
 {
     int i;
     XModifierKeymap *map = *mapp;
@@ -212,10 +208,8 @@ int ClearModifier (mapp, modifier)
 /*
  * print the contents of the map
  */
-
-PrintModifierMapping (map, fp)
-    XModifierKeymap *map;
-    FILE *fp;
+void
+PrintModifierMapping(XModifierKeymap *map, FILE *fp)
 {
     int i, k = 0;
 
@@ -242,10 +236,8 @@ PrintModifierMapping (map, fp)
     return;
 }
 
-
-PrintKeyTable (exprs, fp)
-    Bool exprs;
-    FILE *fp;
+void
+PrintKeyTable(Bool exprs, FILE *fp)
 {
     int         i;
     int min_keycode, max_keycode, keysyms_per_keycode;
@@ -287,11 +279,12 @@ PrintKeyTable (exprs, fp)
 	    else
 		s = "NoSymbol";
 	    if (!exprs)
-		fprintf (fp, "0x%04x (%s)\t", ks, s ? s : "no name");
+		fprintf (fp, "0x%04x (%s)\t", 
+			 (unsigned int)ks, s ? s : "no name");
 	    else if (s)
 		fprintf (fp, " %s", s);
 	    else
-		fprintf (fp, " 0x%04x", ks);
+		fprintf (fp, " 0x%04x", (unsigned int)ks);
 	}
 	keymap += keysyms_per_keycode;
 	fprintf (fp, "\n");
@@ -301,9 +294,8 @@ PrintKeyTable (exprs, fp)
     return;
 }
 
-
-PrintPointerMap (fp)
-    FILE *fp;
+void
+PrintPointerMap(FILE *fp)
 {
     unsigned char pmap[256];		/* there are 8 bits of buttons */
     int count, i;
@@ -327,9 +319,8 @@ PrintPointerMap (fp)
  * SetPointerMap - set the pointer map
  */
 
-int SetPointerMap (map, n)
-    unsigned char *map;
-    int n;
+int 
+SetPointerMap(unsigned char *map, int n)
 {
     unsigned char defmap[MAXBUTTONCODES];
     int j;
