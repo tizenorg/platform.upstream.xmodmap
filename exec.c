@@ -56,7 +56,7 @@ from The Open Group.
  * Author:  Jim Fulton, MIT X Consortium; derived from parts of the
  * original xmodmap, written by David Rosenthal, of Sun Microsystems.
  */
-/* $XFree86$ */
+/* $XFree86: xc/programs/xmodmap/exec.c,v 1.6 2003/12/02 13:13:57 pascal Exp $ */
 
 #include <X11/Xos.h>
 #include <X11/Xlib.h>
