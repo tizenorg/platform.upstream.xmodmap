@@ -1,0 +1,8 @@
+2005-09-28  Kristian Høgsberg  <krh@redhat.com>
+
+	* AUTHORS: Copy bits from COPYING here.
+
+	* README: Copy first paragraph from man page.
+
+	* Makefile.am (EXTRA_DIST): Add swap.km.
+

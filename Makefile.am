@@ -35,3 +35,5 @@ xmodmap_SOURCES =	\
 dist_man1_MANS = \
         xmodmap.man
 
+EXTRA_DIST = \
+	swap.km
