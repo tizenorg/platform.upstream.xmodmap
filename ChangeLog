@@ -1,3 +1,8 @@
+2006-03-22  Matthias Hopf  <mhopf@suse.de>
+
+	* handle.c: (do_pointer):
+	Allow changing of only a few buttons (not all).
+
 2005-12-14  Kevin E. Martin  <kem-at-freedesktop-dot-org>
 
 	* configure.ac:
