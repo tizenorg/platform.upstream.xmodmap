@@ -78,7 +78,7 @@ KeysymToKeycodes(Display *dpy, KeySym keysym, int *pnum_kcs)
 }
 
 static char *
-copy_to_scratch(char *s, int len)
+copy_to_scratch(const char *s, int len)
 {
     static char *buf = NULL;
     static int buflen = 0;
@@ -121,19 +121,19 @@ initialize_map (void)
 
 static void do_keycode ( char *line, int len );
 static void do_keysym ( char *line, int len );
-static void finish_keycodes ( char *line, int len, KeyCode *keycodes, 
+static void finish_keycodes ( const char *line, int len, KeyCode *keycodes, 
 			      int count );
 static void do_add ( char *line, int len );
 static void do_remove ( char *line, int len );
 static void do_clear ( char *line, int len );
 static void do_pointer ( char *line, int len );
-static int get_keysym_list ( char *line, int len, int *np, KeySym **kslistp );
+static int get_keysym_list ( const char *line, int len, int *np, KeySym **kslistp );
 
 static void print_opcode(union op *op);
 
-static int skip_word ( char *s, int len );
-static int skip_chars ( char *s, int len );
-static int skip_space ( char *s, int len );
+static int skip_word ( const char *s, int len );
+static int skip_chars ( const char *s, int len );
+static int skip_space ( const char *s, int len );
 
 static struct dt {
     char *command;			/* name of input command */
@@ -188,7 +188,7 @@ handle_line(char *line,		/* string to parse */
  */ 
 
 static int 
-skip_word (char *s, int len)
+skip_word (const char *s, int len)
 {
     register int n;
 
@@ -197,7 +197,7 @@ skip_word (char *s, int len)
 }
 
 static int 
-skip_chars(char *s, int len)
+skip_chars(const char *s, int len)
 {
     register int i;
 
@@ -210,7 +210,7 @@ skip_chars(char *s, int len)
 }
 
 static int 
-skip_space(char *s, int len)
+skip_space(const char *s, int len)
 {
     register int i;
 
@@ -224,7 +224,7 @@ skip_space(char *s, int len)
 
 
 static int 
-skip_until_char(char *s, int len, char c)
+skip_until_char(const char *s, int len, char c)
 {
     register int i;
 
@@ -267,7 +267,7 @@ add_to_work_queue(union op *p)	/* this can become a macro someday */
 }
 
 static Bool 
-parse_number(char *str, unsigned long *val)
+parse_number(const char *str, unsigned long *val)
 {
     char *fmt = "%ld";
 
@@ -287,7 +287,7 @@ parse_number(char *str, unsigned long *val)
 }
 
 static Bool 
-parse_keysym(char *line, int n, char **name, KeySym *keysym)
+parse_keysym(const char *line, int n, char **name, KeySym *keysym)
 {
     *name = copy_to_scratch (line, n);
     if (!strcmp(*name, "NoSymbol")) {
@@ -400,7 +400,7 @@ do_keysym(char *line, int len)
 }
 
 static void 
-finish_keycodes(char *line, int len, KeyCode *keycodes, int count)
+finish_keycodes(const char *line, int len, KeyCode *keycodes, int count)
 {
     int n;
     KeySym *kslist;
@@ -792,7 +792,7 @@ do_clear(char *line, int len)
 }
 
 static int 
-strncmp_nocase(char *a, char *b, int n)
+strncmp_nocase(const char *a, const char *b, int n)
 {
     int i;
     int a1, b1;
@@ -908,7 +908,7 @@ do_pointer(char *line, int len)
  */
 
 static int 
-get_keysym_list(char *line, int len, int *np, KeySym **kslistp)
+get_keysym_list(const char *line, int len, int *np, KeySym **kslistp)
 {
     int havesofar, maxcanhave;
     KeySym *keysymlist;

@@ -34,10 +34,10 @@ from The Open Group.
 #include "xmodmap.h"
 
 #define NOTINFILEFILENAME "commandline"
-char *inputFilename = NOTINFILEFILENAME;
+const char *inputFilename = NOTINFILEFILENAME;
 int lineno = 0;
 
-void process_file (char *filename)	/* NULL means use stdin */
+void process_file (const char *filename)	/* NULL means use stdin */
 {
     FILE *fp;
     char buffer[BUFSIZ];

@@ -35,7 +35,7 @@ from The Open Group.
 #include <ctype.h>
 #include "xmodmap.h"
 
-char *ProgramName;
+const char *ProgramName;
 Display *dpy = NULL;
 int min_keycode, max_keycode;
 Bool verbose = False;
