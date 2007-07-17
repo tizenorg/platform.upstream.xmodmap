@@ -21,7 +21,7 @@
 
 bin_PROGRAMS = xmodmap
 
-xmodmap_CFLAGS = $(DEP_CFLAGS)
+AM_CFLAGS = $(DEP_CFLAGS)
 xmodmap_LDADD = $(DEP_LIBS)
 
 xmodmap_SOURCES =	\
