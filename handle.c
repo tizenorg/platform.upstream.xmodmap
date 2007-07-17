@@ -972,6 +972,7 @@ get_keysym_list(char *line, int len, int *np, KeySym **kslistp)
 	n = skip_chars (line, len);
 	if (n < 0) {
 	    badmsg0 ("keysym name list");
+	    free(keysymlist);
 	    return (-1);
 	}
 
@@ -990,12 +991,14 @@ get_keysym_list(char *line, int len, int *np, KeySym **kslistp)
 
 	/* grow the list bigger if necessary */
 	if (havesofar >= maxcanhave) {
+	    KeySym *origkeysymlist = keysymlist;
 	    maxcanhave *= 2;
 	    keysymlist = (KeySym *) realloc (keysymlist,
 					     maxcanhave * sizeof (KeySym));
 	    if (!keysymlist) {
 		badmsg ("attempt to grow keysym list to %ld bytes",
 			(long) (maxcanhave * sizeof (KeySym)));
+		free(origkeysymlist);
 		return (-1);
 	    }
 	}
