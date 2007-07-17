@@ -234,24 +234,6 @@ skip_until_char(char *s, int len, char c)
     return (i);
 }
 
-#if 0
-static int 
-skip_until_chars(char *s, int len, char *cs, int cslen)
-{
-    int i;
-
-    for (i = 0; i < len; i++) {
-	register int j;
-	register char c = s[i];
-
-	for (j = 0; j < cslen; j++) {
-	    if (c == cs[j]) goto done;
-	}
-    }
-  done:
-    return (i);
-}
-#endif
 
 /*
  * The action routines.
@@ -283,21 +265,6 @@ add_to_work_queue(union op *p)	/* this can become a macro someday */
     }
     return;
 }
-
-#if 0
-static char *
-copystring(char *s, int len)
-{
-    char *retval;
-
-    retval = (char *) malloc (len+1);
-    if (retval) {
-	strncpy (retval, s, len);
-	retval[len] = '\0';
-    }
-    return (retval);
-}
-#endif
 
 static Bool 
 parse_number(char *str, unsigned long *val)
