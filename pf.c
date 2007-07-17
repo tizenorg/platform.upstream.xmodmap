@@ -37,8 +37,7 @@ from The Open Group.
 char *inputFilename = NOTINFILEFILENAME;
 int lineno = 0;
 
-void process_file (filename)
-    char *filename;			/* NULL means use stdin */
+void process_file (char *filename)	/* NULL means use stdin */
 {
     FILE *fp;
     char buffer[BUFSIZ];
@@ -80,8 +79,7 @@ void process_file (filename)
 }
 
 
-void process_line (buffer)
-    char *buffer;
+void process_line (char *buffer)
 {
     int len;
     int i;
