@@ -28,6 +28,7 @@ from The Open Group.
 */
 /* $XFree86: xc/programs/xmodmap/handle.c,v 3.6 2001/07/25 15:05:27 dawes Exp $ */
 
+#include "config.h"
 #include <X11/Xos.h>
 #include <X11/Xlib.h>
 #include <stdio.h>
@@ -791,8 +792,9 @@ do_clear(char *line, int len)
     add_to_work_queue (uop);
 }
 
+#ifndef HAVE_STRNCASECMP
 static int 
-strncmp_nocase(const char *a, const char *b, int n)
+strncasecmp(const char *a, const char *b, int n)
 {
     int i;
     int a1, b1;
@@ -809,7 +811,7 @@ strncmp_nocase(const char *a, const char *b, int n)
     }
     return 0;
 }
-
+#endif
 
 /*
  * do_pointer = get list of numbers of the form
@@ -851,7 +853,7 @@ do_pointer(char *line, int len)
     line += n, len -= n;
 
     i = 0;
-    if (len < 7 || strncmp_nocase (line, "default", 7) != 0) {
+    if (len < 7 || strncasecmp (line, "default", 7) != 0) {
 	while (len > 0) {
 	    n = skip_space (line, len);
 	    line += n, len -= n;
