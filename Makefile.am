@@ -21,8 +21,8 @@
 
 bin_PROGRAMS = xmodmap
 
-AM_CFLAGS = $(DEP_CFLAGS)
-xmodmap_LDADD = $(DEP_LIBS)
+AM_CFLAGS = $(XMODMAP_CFLAGS)
+xmodmap_LDADD = $(XMODMAP_LIBS)
 
 xmodmap_SOURCES =	\
         exec.c \
@@ -76,7 +76,7 @@ MAINTAINERCLEANFILES = ChangeLog
 .PHONY: ChangeLog
 
 ChangeLog:
-	(GIT_DIR=$(top_srcdir)/.git git-log > .changelog.tmp && mv .changelog.tmp ChangeLog; rm -f .changelog.tmp) || (touch ChangeLog; echo 'git directory not found: installing possibly empty changelog.' >&2)
+	$(CHANGELOG_CMD)
 
 dist-hook: ChangeLog
 

@@ -18,3 +18,7 @@ stamp-h1
 xmodmap
 xmodmap.1
 *~
+*.o
+xmodmap-*.tar.*
+ChangeLog
+tags
