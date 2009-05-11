@@ -53,6 +53,8 @@ SED = sed
 XORGRELSTRING = @PACKAGE_STRING@
   XORGMANNAME = X Version 11
 
+X11_DATADIR=$(datadir)/X11	# Where libX11 installs XKeysymDB
+
 MAN_SUBSTS = \
 	-e 's|__vendorversion__|"$(XORGRELSTRING)" "$(XORGMANNAME)"|' \
 	-e 's|__xorgversion__|"$(XORGRELSTRING)" "$(XORGMANNAME)"|' \
@@ -60,6 +62,7 @@ MAN_SUBSTS = \
 	-e 's|__xconfigfile__|xorg.conf|g' \
 	-e 's|__projectroot__|$(prefix)|g' \
 	-e 's|__apploaddir__|$(appdefaultdir)|' \
+	-e 's|__X11datadir__|$(X11_DATADIR)|' \
 	-e 's|__appmansuffix__|$(APP_MAN_SUFFIX)|g' \
 	-e 's|__libmansuffix__|$(LIB_MAN_SUFFIX)|g' \
 	-e 's|__adminmansuffix__|$(ADMIN_MAN_SUFFIX)|g' \
