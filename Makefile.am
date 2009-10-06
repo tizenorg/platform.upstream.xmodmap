@@ -21,7 +21,7 @@
 
 bin_PROGRAMS = xmodmap
 
-AM_CFLAGS = $(XMODMAP_CFLAGS)
+AM_CFLAGS = $(CWARNFLAGS) $(XMODMAP_CFLAGS)
 xmodmap_LDADD = $(XMODMAP_LIBS)
 
 xmodmap_SOURCES =	\
@@ -72,7 +72,7 @@ MAN_SUBSTS = \
 SUFFIXES = .$(APP_MAN_SUFFIX) .man
 
 .man.$(APP_MAN_SUFFIX):
-	sed $(MAN_SUBSTS) < $< > $@
+	$(AM_V_GEN)$(SED) $(MAN_SUBSTS) < $< > $@
 
 MAINTAINERCLEANFILES = ChangeLog
 
