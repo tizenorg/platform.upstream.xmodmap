@@ -37,7 +37,6 @@ appman_PRE = \
 
 EXTRA_DIST = \
 	ChangeLog \
-	autogen.sh \
 	swap.km
 
 appmandir = $(APP_MAN_DIR)
