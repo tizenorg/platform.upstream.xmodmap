@@ -73,7 +73,6 @@ SUFFIXES = .$(APP_MAN_SUFFIX) .man
 .man.$(APP_MAN_SUFFIX):
 	$(AM_V_GEN)$(SED) $(MAN_SUBSTS) < $< > $@
 
-MAINTAINERCLEANFILES = ChangeLog
 
 .PHONY: ChangeLog
 
