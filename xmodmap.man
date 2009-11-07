@@ -180,7 +180,8 @@ code of 1, button 2 generates a 2, etc.).
 .TP 8
 .B pointer = \fINUMBER ...\fP
 This sets the pointer map to contain the indicated button codes.  The list
-always starts with the first physical button.
+always starts with the first physical button.  Setting a button code to 0
+disables events from that button.
 .PP
 Lines that begin with an exclamation point (!) are taken as comments.
 .PP
