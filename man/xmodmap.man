@@ -1,6 +1,6 @@
 .\" $Xorg: xmodmap.man,v 1.4 2001/02/09 02:05:56 xorgcvs Exp $
 .\"
-.\" Copyright 1987 Sun Microsystems, Inc.  All rights reserved.
+.\" Copyright (c) 1987, 2010, Oracle and/or its affiliates. All rights reserved.
 .\"
 .\" Permission is hereby granted, free of charge, to any person obtaining a
 .\" copy of this software and associated documentation files (the "Software"),
@@ -140,6 +140,12 @@ program reads a list of expressions and parses them all before attempting
 to execute any of them.  This makes it possible to refer to keysyms that are
 being redefined in a natural way without having to worry as much about name
 conflicts.
+.PP
+The list of keysym names may be found in the header file
+\fI<X11/keysymdef.h>\fP (without the \fIXK_\fP prefix),
+supplemented by the keysym database \fI __X11datadir__/XKeysymDB\fP.
+Keysyms matching Unicode characters may be specified as "U0020" to "U007E"
+and "U00A0" to "U10FFFF" for all possible Unicode characters.
 .TP 8
 .B keycode \fINUMBER\fP = \fIKEYSYMNAME ...\fP
 The list of keysyms is assigned to the indicated keycode 
@@ -159,10 +165,7 @@ The list of keysyms may be specified in decimal, hex or octal.
 .TP 8
 .B keysym \fIKEYSYMNAME\fP = \fIKEYSYMNAME ...\fP
 The \fIKEYSYMNAME\fP on the left hand side is translated into matching keycodes
-used to perform the corresponding set of \fBkeycode\fP expressions.
-The list of keysym names may be
-found in the header file \fI<X11/keysymdef.h>\fP (without the \fIXK_\fP prefix)
-or the keysym database \fI __X11datadir__/XKeysymDB\fP.  Note that
+used to perform the corresponding set of \fBkeycode\fP expressions.  Note that
 if the same keysym is bound to multiple keys, the expression is executed
 for each matching keycode.
 .TP 8
