@@ -34,16 +34,10 @@ XORG_DEFAULT_OPTIONS
 
 AM_CONFIG_HEADER(config.h)
 
-AC_PROG_CC
-AC_PROG_INSTALL
-
-
 AC_CHECK_FUNCS([strncasecmp])
 
 # Checks for pkg-config packages
 PKG_CHECK_MODULES(XMODMAP, x11)
-AC_SUBST(XMODMAP_CFLAGS)
-AC_SUBST(XMODMAP_LIBS)
 
 dnl Allow checking code with lint, sparse, etc.
 XORG_WITH_LINT
