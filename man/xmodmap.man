@@ -314,7 +314,9 @@ add Lock = Caps_Lock
 .B DISPLAY
 to get default host and display number.
 .SH SEE ALSO
-X(__miscmansuffix__), xev(1), \fIXlib\fP documentation on key and pointer events
+X(__miscmansuffix__), xev(__appmansuffix__), setxkbmap(__appmansuffix__),
+XStringToKeysym(__libmansuffix__),
+\fIXlib\fP documentation on key and pointer events
 .SH BUGS
 .PP
 Every time a \fBkeycode\fP expression is evaluated, the server generates
