@@ -1,4 +1,3 @@
-/* $Xorg: pf.c,v 1.4 2001/02/09 02:05:56 xorgcvs Exp $ */
 /*
 
 Copyright 1988, 1998  The Open Group
