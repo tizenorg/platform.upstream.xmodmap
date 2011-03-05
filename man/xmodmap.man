@@ -98,7 +98,7 @@ This option turns off the verbose logging.  This is the default.
 This option indicates that 
 .I xmodmap
 should not change the mappings, but should display what it would do, like
-\fImake(1)\fP does when given this option.
+\fImake(__appmansuffix__)\fP does when given this option.
 .TP 8
 .B \-e \fIexpression\fB
 This option specifies an expression to be executed.  Any number of expressions
