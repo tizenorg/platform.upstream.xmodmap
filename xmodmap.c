@@ -156,7 +156,6 @@ main(int argc, char *argv[])
      * the display being open.
      */
 
-    status = 0;
     for (i = 1; i < argc; i++) {
 	char *arg = argv[i];
 
