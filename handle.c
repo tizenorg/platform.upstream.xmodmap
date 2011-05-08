@@ -82,17 +82,22 @@ copy_to_scratch(const char *s, int len)
     static char *buf = NULL;
     static int buflen = 0;
 
-    if (len > buflen) {
+    if (len < 0)
+        len = 0;
+
+    if (len >= buflen) {
 	if (buf) free (buf);
 	buflen = (len < 40) ? 80 : (len * 2);
 	buf = (char *) malloc (buflen+1);
+	if (!buf) {
+	    fprintf (stderr, "attempt to allocate %d byte scratch buffer\n", buflen + 1);
+	    return NULL;
+	}
     }
-    if (len > 0)
-      strncpy (buf, s, len);
-    else 
-      len = 0;
 
+    strncpy (buf, s, len);
     buf[len] = '\0';
+
     return (buf);
 }
 
