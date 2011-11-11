@@ -40,6 +40,7 @@ Bool verbose = False;
 Bool dontExecute = False;
 
 static void 
+_X_NORETURN
 Exit(int status)
 {
     if (dpy) {
@@ -76,6 +77,7 @@ static const char help_message[] =
 
 
 static void 
+_X_NORETURN
 usage(void)
 {
     fprintf (stderr, "usage:  %s [-options ...] [filename]\n", ProgramName);
@@ -105,6 +107,7 @@ static const char grammar_message[] =
 
 
 static void 
+_X_NORETURN
 grammar_usage(void)
 {
     fprintf (stderr, "%s accepts the following input expressions:\n\n",

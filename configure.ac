@@ -40,7 +40,7 @@ AC_CONFIG_HEADERS([config.h])
 AC_CHECK_FUNCS([strncasecmp])
 
 # Checks for pkg-config packages
-PKG_CHECK_MODULES(XMODMAP, x11)
+PKG_CHECK_MODULES(XMODMAP, x11 xproto >= 7.0.17)
 
 dnl Allow checking code with lint, sparse, etc.
 XORG_WITH_LINT
