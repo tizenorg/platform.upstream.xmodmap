@@ -35,6 +35,10 @@ from The Open Group.
 #include "wq.h"
 #include <stdlib.h>
 
+#ifdef HAVE_STRNCASECMP
+#include <strings.h>
+#endif
+
 static XModifierKeymap *map = NULL;
 
 
