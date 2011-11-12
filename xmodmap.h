@@ -26,6 +26,10 @@ from The Open Group.
 
 */
 
+#ifdef HAVE_CONFIG_H
+# include "config.h"
+#endif
+
 extern const char *ProgramName;
 extern Display *dpy;
 extern int min_keycode, max_keycode;
@@ -56,4 +60,3 @@ extern void PrintPointerMap(FILE *fp);
 extern int SetPointerMap(unsigned char *map, int n);
 
 extern void _X_NORETURN Exit(int status);
-extern void *chk_malloc(size_t n_bytes);

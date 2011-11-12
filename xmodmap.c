@@ -31,6 +31,7 @@ from The Open Group.
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
+#include <stdarg.h>
 #include "xmodmap.h"
 
 const char *ProgramName;
@@ -50,16 +51,54 @@ Exit(int status)
     exit (status);
 }
 
-void *
-chk_malloc(size_t n_bytes)
+static void _X_NORETURN
+FatalError(const char *message)
 {
-    void *buf = malloc(n_bytes);
-    if (!buf) {
-	fprintf(stderr, "%s: Could not allocate %d bytes\n", ProgramName, (int)n_bytes);
-	Exit(-1);
-    }
-    return buf;
+    fprintf(stderr, "%s: %s\n", ProgramName, message);
+    Exit(-1);
 }
+
+#ifndef HAVE_ASPRINTF
+/* sprintf variant found in newer libc's which allocates string to print to */
+static int _X_ATTRIBUTE_PRINTF(2,3)
+asprintf(char ** ret, const char *format, ...)
+{
+    char buf[256];
+    int len;
+    va_list ap;
+
+    va_start(ap, format);
+    len = vsnprintf(buf, sizeof(buf), format, ap);
+    va_end(ap);
+
+    if (len < 0)
+	return -1;
+
+    if (len < sizeof(buf))
+    {
+	*ret = strdup(buf);
+    }
+    else
+    {
+	*ret = malloc(len + 1); /* snprintf doesn't count trailing '\0' */
+	if (*ret != NULL)
+	{
+	    va_start(ap, format);
+	    len = vsnprintf(*ret, len + 1, format, ap);
+	    va_end(ap);
+	    if (len < 0) {
+		free(*ret);
+		*ret = NULL;
+	    }
+	}
+    }
+
+    if (*ret == NULL)
+	return -1;
+
+    return len;
+}
+#endif /* HAVE_ASPRINTF */
 
 static const char help_message[] = 
 "\nwhere options include:\n"
@@ -247,11 +286,11 @@ main(int argc, char *argv[])
 		  char *cmd;
 		  didAnything = True;
 		  if (++i >= argc) usage ();
-		  cmd = chk_malloc (strlen ("remove control = ") + strlen (argv[i]) + 1);
-		  (void) sprintf (cmd, "remove %s = %s",
+		  if (asprintf (&cmd, "remove %s = %s",
 				  ((arg[1] == 's') ? "shift" :
 				   ((arg[1] == 'l') ? "lock" :
-				    "control")), argv[i]);
+				    "control")), argv[i]) == -1)
+		      FatalError("Could not allocate memory for remove cmd");
 		  process_line (cmd);
 		  continue;
 	      }
@@ -269,8 +308,8 @@ main(int argc, char *argv[])
 		  char *cmd;
 		  didAnything = True;
 		  if (++i >= argc) usage ();
-		  cmd = chk_malloc (strlen ("add modX = ") + strlen (argv[i]) + 1);
-		  (void) sprintf (cmd, "add mod%c = %s", arg[1], argv[i]);
+		  if (asprintf (&cmd, "add mod%c = %s", arg[1], argv[i]) == -1)
+		      FatalError("Could not allocate memory for add cmd");
 		  process_line (cmd);
 		  continue;
 	      }
@@ -285,11 +324,11 @@ main(int argc, char *argv[])
 		  char *cmd;
 		  didAnything = True;
 		  if (++i >= argc) usage ();
-		  cmd = chk_malloc (strlen ("add control = ") + strlen (argv[i]) + 1);
-		  (void) sprintf (cmd, "add %s = %s",
+		  if (asprintf (&cmd, "add %s = %s",
 				  ((arg[1] == 's') ? "shift" :
 				   ((arg[1] == 'l') ? "lock" :
-				    "control")), argv[i]);
+				    "control")), argv[i]) == -1)
+		      FatalError("Could not allocate memory for remove cmd");
 		  process_line (cmd);
 		  continue;
 	      }
