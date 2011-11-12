@@ -280,7 +280,7 @@ PrintKeyTable(Bool exprs, FILE *fp)
 	    max--;
 	for (j = 0; j <= max; j++) {
 	    register KeySym ks = keymap[j];
-	    char *s;
+	    const char *s;
 	    if (ks != NoSymbol)
 		s = XKeysymToString (ks);
 	    else

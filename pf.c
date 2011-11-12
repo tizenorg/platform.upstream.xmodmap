@@ -78,17 +78,19 @@ void process_file (const char *filename)	/* NULL means use stdin */
 }
 
 
-void process_line (char *buffer)
+void process_line (const char *line)
 {
     int len;
     int i;
-    char *cp;
+    char *cp, *buffer;
 
-    /* copy buffer since it may point to unwritable date */
-    len = strlen(buffer);
-    cp = chk_malloc(len + 1);
-    strcpy(cp, buffer);
-    buffer = cp;
+    /* copy line to buffer since it may point to unwritable data */
+    len = strlen(line);
+    cp = buffer = strdup(line);
+    if (buffer == NULL) {
+	fprintf(stderr, "%s: Could not allocate %d bytes\n", ProgramName, len);
+	Exit(-1);
+    }
     
     for (i = 0; i < len; i++) {		/* look for blank lines */
 	register char c = buffer[i];

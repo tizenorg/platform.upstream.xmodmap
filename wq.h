@@ -135,7 +135,7 @@ extern struct wq {
 
 
 extern struct modtab {
-    char *name;
+    const char *name;
     int length;
     int value;
 } modifier_table[];

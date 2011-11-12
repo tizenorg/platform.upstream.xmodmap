@@ -144,7 +144,7 @@ static int skip_chars ( const char *s, int len );
 static int skip_space ( const char *s, int len );
 
 static struct dt {
-    char *command;			/* name of input command */
+    const char *command;		/* name of input command */
     int length;				/* length of command */
     void (*proc)(char *, int);		/* handler */
 } dispatch_table[] = {
@@ -277,7 +277,7 @@ add_to_work_queue(union op *p)	/* this can become a macro someday */
 static Bool 
 parse_number(const char *str, unsigned long *val)
 {
-    char *fmt = "%ld";
+    const char *fmt = "%ld";
 
     if (*str == '0') {
 	str++;
@@ -324,7 +324,7 @@ static void
 do_keycode(char *line, int len)
 {
     int dummy;
-    char *fmt = "%d";
+    const char *fmt = "%d";
     KeyCode keycode;
 
     if (len < 3 || !line || *line == '\0') {  /* 5=a minimum */

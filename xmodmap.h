@@ -37,7 +37,7 @@ extern int parse_errors;
 
 extern void initialize_map(void);
 extern void process_file(const char *filename);
-extern void process_line(char *buffer);
+extern void process_line(const char *buffer);
 extern void handle_line(char *line, int len);
 extern void print_work_queue(void);
 extern int execute_work_queue(void);
@@ -55,4 +55,5 @@ extern void PrintKeyTable(Bool exprs, FILE *fp);
 extern void PrintPointerMap(FILE *fp);
 extern int SetPointerMap(unsigned char *map, int n);
 
+extern void _X_NORETURN Exit(int status);
 extern void *chk_malloc(size_t n_bytes);

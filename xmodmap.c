@@ -39,7 +39,7 @@ int min_keycode, max_keycode;
 Bool verbose = False;
 Bool dontExecute = False;
 
-static void 
+void
 _X_NORETURN
 Exit(int status)
 {
