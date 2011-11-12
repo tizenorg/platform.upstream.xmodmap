@@ -30,6 +30,7 @@ from The Open Group.
 #include <X11/Xlib.h>
 #include <stdio.h>
 #include <ctype.h>
+#include <stdlib.h>
 #include "xmodmap.h"
 
 #define NOTINFILEFILENAME "commandline"
@@ -96,11 +97,11 @@ void process_line (const char *line)
 	register char c = buffer[i];
 	if (!(isspace(c) || c == '\n')) break;
     }
-    if (i == len) return;
+    if (i == len) goto done;
 
     cp = &buffer[i];
 
-    if (*cp == '!') return;		/* look for comments */
+    if (*cp == '!') goto done;		/* look for comments */
     len -= (cp - buffer);		/* adjust len by how much we skipped */
 
 					/* pipe through cpp */
@@ -118,4 +119,7 @@ void process_line (const char *line)
 
     /* handle input */
     handle_line (cp, len);
+
+  done:
+    free(buffer);
 }
