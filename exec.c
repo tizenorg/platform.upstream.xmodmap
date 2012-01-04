@@ -58,6 +58,10 @@ from The Open Group.
 # include "config.h"
 #endif
 
+#ifdef WIN32
+#include <X11/Xwindows.h>
+#endif
+
 #include <X11/Xos.h>
 #include <X11/Xlib.h>
 #include <stdio.h>
