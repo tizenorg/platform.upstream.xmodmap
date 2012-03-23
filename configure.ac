@@ -23,7 +23,7 @@ dnl Process this file with autoconf to create configure.
 
 AC_PREREQ([2.60])
 AC_INIT([xmodmap],
-	[1.0.5],
+	[1.0.6],
 	[https://bugs.freedesktop.org/enter_bug.cgi?product=xorg],
 	[xmodmap])
 AM_INIT_AUTOMAKE([foreign dist-bzip2])
