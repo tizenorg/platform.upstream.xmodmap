@@ -29,6 +29,8 @@ AC_INIT([xmodmap],
 	[xmodmap])
 AC_CONFIG_SRCDIR([Makefile.am])
 AC_CONFIG_HEADERS([config.h])
+# Needed for asprintf on GNU libc
+AC_USE_SYSTEM_EXTENSIONS
 
 # Initialize Automake
 AM_INIT_AUTOMAKE([foreign dist-bzip2])
