@@ -1,0 +1,12 @@
+Index: xmodmap-1.0.6/xmodmap.c
+===================================================================
+--- xmodmap-1.0.6.orig/xmodmap.c
++++ xmodmap-1.0.6/xmodmap.c
+@@ -26,6 +26,7 @@ from The Open Group.
+ 
+ */
+ 
++#define _GNU_SOURCE
+ #include <X11/Xos.h>
+ #include <X11/Xlib.h>
+ #include <stdio.h>
