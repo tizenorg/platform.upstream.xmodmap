@@ -8,6 +8,7 @@ Group:          System/X11/Utilities
 Source0:        http://xorg.freedesktop.org/releases/individual/app/%{name}-%{version}.tar.bz2
 Source1:        Xmodmap.template
 Source2:        Xmodmap.remote.template
+Source1001: 	xmodmap.manifest
 BuildRequires:  pkg-config
 BuildRequires:  pkgconfig(x11)
 BuildRequires:  pkgconfig(xorg-macros) >= 1.8
@@ -22,6 +23,7 @@ tastes.
 
 %prep
 %setup -q
+cp %{SOURCE1001} .
 
 %build
 %configure
@@ -33,6 +35,7 @@ install -m0644 -D %{SOURCE1} %{buildroot}%{_sysconfdir}/X11/Xmodmap
 install -m0644 -D %{SOURCE2} %{buildroot}%{_sysconfdir}/X11/Xmodmap.remote
 
 %files
+%manifest %{name}.manifest
 %defattr(-,root,root)
 %doc COPYING
 %config %{_sysconfdir}/X11/Xmodmap
