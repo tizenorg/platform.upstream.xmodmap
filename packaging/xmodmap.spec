@@ -1,3 +1,5 @@
+%bcond_with x
+
 Name:           xmodmap
 Version:        1.0.7
 Release:        0
@@ -13,6 +15,10 @@ BuildRequires:  pkg-config
 BuildRequires:  pkgconfig(x11)
 BuildRequires:  pkgconfig(xorg-macros) >= 1.8
 BuildRequires:  pkgconfig(xproto) >= 7.0.17
+
+%if !%{with x}
+ExclusiveArch:
+%endif
 
 %description
 The xmodmap program is used to edit and display the keyboard modifier
