@@ -10,13 +10,14 @@ Group:          System/X11/Utilities
 Source0:        http://xorg.freedesktop.org/releases/individual/app/%{name}-%{version}.tar.bz2
 Source1:        Xmodmap.template
 Source2:        Xmodmap.remote.template
-Source1001: 	xmodmap.manifest
+Source1001:     xmodmap.manifest
 BuildRequires:  pkg-config
+
+%if %{with x}
 BuildRequires:  pkgconfig(x11)
 BuildRequires:  pkgconfig(xorg-macros) >= 1.8
 BuildRequires:  pkgconfig(xproto) >= 7.0.17
-
-%if !%{with x}
+%else
 ExclusiveArch:
 %endif
 
@@ -44,10 +45,8 @@ install -m0644 -D %{SOURCE2} %{buildroot}%{_sysconfdir}/X11/Xmodmap.remote
 %files
 %manifest %{name}.manifest
 %defattr(-,root,root)
-%doc COPYING
+%license COPYING
 %config %{_sysconfdir}/X11/Xmodmap
 %config %{_sysconfdir}/X11/Xmodmap.remote
 %{_bindir}/xmodmap
 %{_mandir}/man1/xmodmap.1%{?ext_man}
-
-%changelog
