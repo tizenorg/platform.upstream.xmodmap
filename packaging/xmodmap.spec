@@ -1,7 +1,7 @@
 %bcond_with x
 
 Name:           xmodmap
-Version:        1.0.7
+Version:        1.0.8
 Release:        0
 License:        MIT
 Summary:        Utility to modify keymaps and pointer button mappings in X
@@ -34,7 +34,7 @@ tastes.
 cp %{SOURCE1001} .
 
 %build
-%configure
+%autogen
 make %{?_smp_mflags}
 
 %install
